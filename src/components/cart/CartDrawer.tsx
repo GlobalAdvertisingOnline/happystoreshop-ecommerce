@@ -116,7 +116,7 @@ export function CartDrawer() {
                             onClick={() =>
                               updateQuantity(item.variantId, item.quantity - 1)
                             }
-                            className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-200 text-slate-500 transition-colors hover:bg-slate-100"
+                            className="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 text-slate-500 transition-colors hover:bg-slate-100"
                             aria-label={`Decrease quantity of ${item.name}`}
                           >
                             <Minus className="h-3 w-3" />
@@ -128,7 +128,7 @@ export function CartDrawer() {
                             onClick={() =>
                               updateQuantity(item.variantId, item.quantity + 1)
                             }
-                            className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-200 text-slate-500 transition-colors hover:bg-slate-100"
+                            className="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 text-slate-500 transition-colors hover:bg-slate-100"
                             aria-label={`Increase quantity of ${item.name}`}
                           >
                             <Plus className="h-3 w-3" />
@@ -140,7 +140,7 @@ export function CartDrawer() {
                           </span>
                           <button
                             onClick={() => removeItem(item.variantId)}
-                            className="flex h-7 w-7 items-center justify-center rounded-md text-slate-400 transition-colors hover:bg-red-50 hover:text-red-500"
+                            className="flex h-9 w-9 items-center justify-center rounded-md text-slate-400 transition-colors hover:bg-red-50 hover:text-red-500"
                             aria-label={`Remove ${item.name} from cart`}
                           >
                             <Trash2 className="h-3.5 w-3.5" />

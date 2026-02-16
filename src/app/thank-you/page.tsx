@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
+"use client";
+
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle, Package, ArrowRight } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Thank You",
-  description: "Your order has been placed successfully.",
-};
+function ThankYouContent() {
+  const searchParams = useSearchParams();
+  const orderId = searchParams.get("orderId");
+  const email = searchParams.get("email");
 
-export default function ThankYouPage() {
   return (
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-2xl px-4 text-center md:px-6">
@@ -21,7 +23,12 @@ export default function ThankYouPage() {
         </h1>
 
         <p className="mt-4 text-lg text-slate-600">
-          Your order has been placed successfully. A confirmation email has been sent to your inbox.
+          Your order has been placed successfully.
+          {email ? (
+            <> A confirmation email has been sent to <strong>{email}</strong>.</>
+          ) : (
+            " A confirmation email has been sent to your inbox."
+          )}
         </p>
 
         {/* Order details card */}
@@ -31,9 +38,12 @@ export default function ThankYouPage() {
             <h2 className="text-base font-semibold text-slate-900">Order Details</h2>
           </div>
           <div className="mt-4 flex flex-col gap-2 text-sm">
-            <p className="text-slate-600">
-              Your order number and details are in your confirmation email.
-            </p>
+            {orderId && (
+              <div className="flex justify-between">
+                <span className="text-slate-500">Order Number</span>
+                <span className="font-semibold text-slate-900">{orderId}</span>
+              </div>
+            )}
             <p className="text-slate-600">
               Most orders ship within 1-3 business days. You&apos;ll receive a tracking email when your order is on its way.
             </p>
@@ -70,5 +80,27 @@ export default function ThankYouPage() {
         </p>
       </div>
     </section>
+  );
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense
+      fallback={
+        <section className="py-16 md:py-24">
+          <div className="mx-auto max-w-2xl px-4 text-center md:px-6">
+            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-brand-green/10">
+              <CheckCircle className="h-10 w-10 text-brand-green" />
+            </div>
+            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+              Thank You for Your Order!
+            </h1>
+            <p className="mt-4 text-lg text-slate-600">Loading order details...</p>
+          </div>
+        </section>
+      }
+    >
+      <ThankYouContent />
+    </Suspense>
   );
 }

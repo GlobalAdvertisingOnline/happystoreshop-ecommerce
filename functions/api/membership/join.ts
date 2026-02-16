@@ -26,7 +26,7 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
     const sessionId = clickResult.message as string;
 
     // Step 2: Import Lead
-    await callCheckoutChamp(context.env, "/lead/import", {
+    const leadResult = await callCheckoutChamp(context.env, "/lead/import", {
       campaignId: context.env.CHECKOUT_CHAMP_CAMPAIGN_ID,
       sessionId,
       emailAddress: parsed.email,
@@ -41,6 +41,10 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
       country: parsed.country,
       ipAddress: context.request.headers.get("CF-Connecting-IP") || "0.0.0.0",
     });
+
+    if (leadResult.result !== "SUCCESS") {
+      return errorResponse("Failed to submit membership details", 502);
+    }
 
     // Step 3: Import Order with membership subscription product
     // SECURITY: Card data forwarded directly, never logged or stored

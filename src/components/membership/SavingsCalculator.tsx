@@ -5,7 +5,7 @@ import { useState } from "react";
 export function SavingsCalculator() {
   const [monthlySpend, setMonthlySpend] = useState(200);
 
-  const shippingSaved = 8.99; // Average shipping cost
+  const shippingSaved = monthlySpend < 75 ? 5.99 : 0; // Free shipping kicks in at $75
   const discountSaved = monthlySpend * 0.15;
   const totalSaved = shippingSaved + discountSaved;
   const netSavings = totalSaved - 29.95;
@@ -71,7 +71,7 @@ export function SavingsCalculator() {
         </div>
 
         <p className="mt-4 text-xs text-slate-500">
-          Based on average shipping cost of $8.99 per order. Actual savings may vary.
+          Shipping is $5.99 per order (free on orders $75+). Actual savings may vary.
         </p>
       </div>
     </section>

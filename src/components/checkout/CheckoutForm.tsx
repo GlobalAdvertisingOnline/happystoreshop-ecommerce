@@ -112,8 +112,21 @@ export function CheckoutForm() {
     else if (cardDigits.length < 13 || cardDigits.length > 16) errs.cardNumber = "Enter a valid card number.";
     if (!payment.cardExpiry.trim()) errs.cardExpiry = "Expiry date is required.";
     else if (!/^\d{2}\/\d{2}$/.test(payment.cardExpiry)) errs.cardExpiry = "Use MM/YY format.";
+    else {
+      const [mm, yy] = payment.cardExpiry.split("/");
+      const month = parseInt(mm, 10);
+      if (month < 1 || month > 12) {
+        errs.cardExpiry = "Enter a valid month (01-12).";
+      } else {
+        const now = new Date();
+        const expYear = 2000 + parseInt(yy, 10);
+        if (expYear < now.getFullYear() || (expYear === now.getFullYear() && month < now.getMonth() + 1)) {
+          errs.cardExpiry = "This card has expired.";
+        }
+      }
+    }
     if (!payment.cardCvv.trim()) errs.cardCvv = "CVV is required.";
-    else if (payment.cardCvv.length < 3) errs.cardCvv = "Enter a valid CVV.";
+    else if (payment.cardCvv.length < 3 || payment.cardCvv.length > 4) errs.cardCvv = "Enter a valid CVV (3-4 digits).";
     setPaymentErrors(errs);
     return Object.keys(errs).length === 0;
   }
@@ -227,6 +240,23 @@ export function CheckoutForm() {
   ]
     .filter(Boolean)
     .join(", ");
+
+  // Guard: empty cart
+  if (items.length === 0) {
+    return (
+      <div className="py-12 text-center">
+        <p className="mb-4 text-lg text-slate-600">
+          Your cart is empty. Add some items before checking out.
+        </p>
+        <a
+          href="/shop"
+          className="inline-block rounded-xl bg-brand-blue px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-blue-dark"
+        >
+          Browse Products
+        </a>
+      </div>
+    );
+  }
 
   return (
     <div className="grid gap-8 lg:grid-cols-3">

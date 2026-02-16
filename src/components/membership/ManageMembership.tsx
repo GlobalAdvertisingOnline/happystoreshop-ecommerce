@@ -28,6 +28,9 @@ export function ManageMembership() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+
+      if (!res.ok) throw new Error("Server error");
+
       const data = await res.json();
 
       if (data.status === "active") {
@@ -62,6 +65,9 @@ export function ManageMembership() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ customerId: memberData.customerId }),
       });
+
+      if (!res.ok) throw new Error("Server error");
+
       const data = await res.json();
 
       if (data.result === "SUCCESS") {

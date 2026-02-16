@@ -74,6 +74,9 @@ export function MembershipProvider({ children }: { children: ReactNode }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+
+      if (!res.ok) throw new Error("Server error");
+
       const data = await res.json();
 
       if (data.result === "SUCCESS") {
