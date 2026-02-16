@@ -194,7 +194,7 @@ export function CheckoutForm() {
         body: JSON.stringify({
           sessionId,
           cardNumber: cardDigits,
-          cardExpiryDate: `${expMonth}20${expYear}`,
+          cardExpiryDate: `${expMonth}${expYear}`,
           cvv: payment.cardCvv,
           products: items.map((item, i) => ({
             id: item.ccProductId,

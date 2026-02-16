@@ -26,6 +26,7 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
       campaignId: context.env.CHECKOUT_CHAMP_CAMPAIGN_ID,
       sessionId: parsed.sessionId,
       paySource: "CREDITCARD",
+      billShipSame: "1",
       creditCardNumber: parsed.cardNumber,
       expirationDate: parsed.cardExpiryDate,
       CVV: parsed.cvv,
@@ -40,6 +41,7 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
           message:
             result.message ||
             "Payment declined. Please check your card details or try another card.",
+          errorCode: result.errorCode || null,
         },
         422
       );

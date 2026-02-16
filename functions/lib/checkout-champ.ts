@@ -20,10 +20,15 @@ export async function callCheckoutChamp(
 ): Promise<CCResponse> {
   const normalizedEndpoint = endpoint.endsWith("/") ? endpoint : endpoint + "/";
   const url = new URL(normalizedEndpoint, CC_API_BASE);
-  url.searchParams.set("loginId", env.CHECKOUT_CHAMP_LOGIN_ID);
-  url.searchParams.set("password", env.CHECKOUT_CHAMP_PASSWORD);
 
-  for (const [key, value] of Object.entries(params)) {
+  // Auth + all params go in query string (Checkout Champ API standard)
+  const allParams: Record<string, string> = {
+    loginId: env.CHECKOUT_CHAMP_LOGIN_ID,
+    password: env.CHECKOUT_CHAMP_PASSWORD,
+    ...params,
+  };
+
+  for (const [key, value] of Object.entries(allParams)) {
     url.searchParams.set(key, value);
   }
 

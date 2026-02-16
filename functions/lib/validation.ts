@@ -21,7 +21,7 @@ export const leadSchema = z.object({
 export const orderSchema = z.object({
   sessionId: z.string().min(1),
   cardNumber: z.string().min(13).max(16),
-  cardExpiryDate: z.string().regex(/^\d{6}$/),
+  cardExpiryDate: z.string().regex(/^\d{4}$/),
   cvv: z.string().min(3).max(4),
   products: z.array(
     z.object({
@@ -54,7 +54,7 @@ export const membershipJoinSchema = z.object({
   zip: z.string().regex(/^\d{5}(-\d{4})?$/),
   country: z.string().default("US"),
   cardNumber: z.string().min(13).max(16),
-  cardExpiryDate: z.string().regex(/^\d{6}$/),
+  cardExpiryDate: z.string().regex(/^\d{4}$/),
   cvv: z.string().min(3).max(4),
 });
 

@@ -38,7 +38,8 @@ export type ProductCategory =
   | "Earrings"
   | "Rings"
   | "Bracelets"
-  | "Sets";
+  | "Sets"
+  | "Accessories";
 
 export interface CartItem {
   productSlug: string;
