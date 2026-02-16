@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SHIPPING } from "@/lib/constants";
 
 export function SavingsCalculator() {
-  const [monthlySpend, setMonthlySpend] = useState(200);
+  const [monthlySpend, setMonthlySpend] = useState(300);
 
   const shippingThresholdDollars = SHIPPING.freeThreshold / 100;
   const shippingDollars = SHIPPING.flatRate / 100;
@@ -60,13 +60,17 @@ export function SavingsCalculator() {
             <div className="border-t border-slate-100 pt-3">
               <div className="flex justify-between">
                 <span className="text-base font-bold text-slate-900">Your net savings</span>
-                <span className={`text-xl font-bold ${netSavings > 0 ? "text-brand-green" : "text-slate-500"}`}>
-                  {netSavings > 0 ? `$${netSavings.toFixed(2)}` : "$0.00"}
+                <span className={`text-xl font-bold ${netSavings > 0 ? "text-brand-green" : "text-red-500"}`}>
+                  {netSavings >= 0 ? `$${netSavings.toFixed(2)}` : `-$${Math.abs(netSavings).toFixed(2)}`}
                 </span>
               </div>
-              {netSavings > 0 && (
+              {netSavings > 0 ? (
                 <p className="mt-2 text-sm text-brand-green">
                   You save ${netSavings.toFixed(2)} every month with HappyStore+!
+                </p>
+              ) : (
+                <p className="mt-2 text-sm text-slate-500">
+                  Increase your monthly spend to see the full value of HappyStore+.
                 </p>
               )}
             </div>

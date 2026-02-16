@@ -1,5 +1,5 @@
 import { Product } from "@/lib/types/product";
-import { getProductsByCategory } from "@/data/products";
+import { getProductsByCategory, ALL_PRODUCTS } from "@/data/products";
 import { ProductCard } from "@/components/shop/ProductCard";
 
 export function RelatedProducts({
@@ -7,9 +7,19 @@ export function RelatedProducts({
 }: {
   product: Product;
 }) {
-  const related = getProductsByCategory(product.category)
-    .filter((p) => p.slug !== product.slug)
-    .slice(0, 4);
+  // Start with same-category products
+  let related = getProductsByCategory(product.category)
+    .filter((p) => p.slug !== product.slug);
+
+  // If fewer than 3 same-category items, fill with top-rated from other categories
+  if (related.length < 3) {
+    const otherProducts = ALL_PRODUCTS
+      .filter((p) => p.slug !== product.slug && !related.some((r) => r.slug === p.slug))
+      .sort((a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount);
+    related = [...related, ...otherProducts].slice(0, 4);
+  } else {
+    related = related.slice(0, 4);
+  }
 
   if (related.length === 0) return null;
 

@@ -25,6 +25,7 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
     const result = await callCheckoutChamp(context.env, "/order/import", {
       campaignId: context.env.CHECKOUT_CHAMP_CAMPAIGN_ID,
       sessionId: parsed.sessionId,
+      paySource: "CREDITCARD",
       creditCardNumber: parsed.cardNumber,
       expirationDate: parsed.cardExpiryDate,
       CVV: parsed.cvv,

@@ -45,7 +45,9 @@ export const shippingPolicyContent = {
         "<li><strong>Destination:</strong> Shipping rates vary depending on the delivery address, particularly for remote areas or international destinations.</li>" +
         "<li><strong>Shipping method:</strong> Express and expedited shipping options carry higher costs than standard delivery.</li>" +
         "</ul>" +
-        "<p>Any applicable shipping charges will be clearly displayed during the checkout process before you finalize your purchase. Promotional free shipping offers, when available, will be applied automatically or through a valid promotional code at checkout. Free shipping promotions apply to standard domestic shipping only unless otherwise stated.</p>",
+        "<p>Standard domestic shipping is a flat rate of $5.99 per order. <strong>Orders totaling $75 or more qualify for free standard domestic shipping.</strong> This free shipping threshold is applied automatically at checkout — no promo code needed.</p>" +
+        "<p>Any applicable shipping charges will be clearly displayed during the checkout process before you finalize your purchase. Additional promotional free shipping offers, when available, will be applied automatically or through a valid promotional code at checkout. Free shipping promotions apply to standard domestic shipping only unless otherwise stated.</p>" +
+        "<p><strong>HappyStore+ members</strong> enjoy free shipping on every order with no minimums and no exceptions. Learn more at <a href=\"/membership\">happystoreshop.com/membership</a>.</p>",
     },
     {
       id: "order-tracking",
