@@ -101,4 +101,18 @@
   .img-reveal.loaded {
     opacity: 1;
   }
+
+  /* Price strikethrough */
+  .price-compare {
+    text-decoration: line-through;
+    color: #94a3b8;
+  }
+
+  /* Membership gold gradient text */
+  .membership-gold {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }

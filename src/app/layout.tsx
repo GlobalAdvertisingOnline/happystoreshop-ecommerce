@@ -5,6 +5,9 @@ import { IMAGES } from "@/lib/constants";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/layout/CookieBanner";
+import { CartProvider } from "@/lib/cart/CartContext";
+import { CartDrawer } from "@/components/cart/CartDrawer";
+import { MembershipProvider } from "@/lib/membership/MembershipContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -57,16 +60,21 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand-blue focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg"
-        >
-          Skip to main content
-        </a>
-        <Header />
-        <main id="main-content" className="min-h-screen">{children}</main>
-        <Footer />
-        <CookieBanner />
+        <CartProvider>
+        <MembershipProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand-blue focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg"
+          >
+            Skip to main content
+          </a>
+          <Header />
+          <main id="main-content" className="min-h-screen">{children}</main>
+          <Footer />
+          <CartDrawer />
+          <CookieBanner />
+        </MembershipProvider>
+        </CartProvider>
       </body>
     </html>
   );
