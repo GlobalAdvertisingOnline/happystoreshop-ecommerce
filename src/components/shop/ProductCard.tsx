@@ -27,12 +27,14 @@ export function ProductCard({ product }: { product: Product }) {
       price: defaultVariant.price,
       image: product.images[0],
       type: product.type,
+      ccProductId: product.checkoutChampProductId,
     });
   };
 
   return (
     <Link
       href={`/products/${product.slug}`}
+      aria-label={`View ${product.name} details`}
       className="hover-lift group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm"
     >
       {/* Image */}
@@ -51,7 +53,7 @@ export function ProductCard({ product }: { product: Product }) {
         )}
         {product.type === "subscription" && (
           <span className="absolute right-3 top-3 rounded-full bg-brand-gold px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
-            Subscribe
+            Membership
           </span>
         )}
       </div>
@@ -89,8 +91,8 @@ export function ProductCard({ product }: { product: Product }) {
               {formatPrice(defaultVariant.compareAtPrice!)}
             </span>
           )}
-          {product.type === "subscription" && (
-            <span className="text-xs text-slate-500">/{product.subscription?.interval}</span>
+          {product.type === "subscription" && product.subscription && (
+            <span className="text-xs text-slate-500">/{product.subscription.interval}</span>
           )}
         </div>
 
@@ -100,7 +102,7 @@ export function ProductCard({ product }: { product: Product }) {
           className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-brand-blue px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-blue-dark hover:shadow-md"
         >
           <ShoppingCart className="h-4 w-4" />
-          {product.type === "subscription" ? "Subscribe" : "Add to Cart"}
+          Add to Cart
         </button>
       </div>
     </Link>

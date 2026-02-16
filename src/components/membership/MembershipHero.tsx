@@ -18,7 +18,7 @@ export function MembershipHero() {
         </p>
 
         <p className="mt-6 text-2xl font-bold text-slate-900">
-          $29.95<span className="text-base font-normal text-slate-500">/month</span>
+          $39.95<span className="text-base font-normal text-slate-500">/month</span>
           <span className="mx-3 text-slate-300">·</span>
           <span className="text-base font-normal text-slate-500">Cancel anytime</span>
         </p>

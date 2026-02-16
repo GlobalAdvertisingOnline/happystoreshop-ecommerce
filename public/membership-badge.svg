@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a5f"/>
+      <stop offset="50%" style="stop-color:#1a3152"/>
+      <stop offset="100%" style="stop-color:#0f2137"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0d060"/>
+      <stop offset="40%" style="stop-color:#e8c840"/>
+      <stop offset="70%" style="stop-color:#d4a830"/>
+      <stop offset="100%" style="stop-color:#c49828"/>
+    </linearGradient>
+    <linearGradient id="goldLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fce68a"/>
+      <stop offset="100%" style="stop-color:#d4a830"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0)"/>
+      <stop offset="50%" style="stop-color:rgba(255,255,255,0.15)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="800" rx="48" fill="url(#bg)"/>
+
+  <!-- Subtle pattern overlay -->
+  <rect width="800" height="800" rx="48" fill="url(#shine)" opacity="0.5"/>
+
+  <!-- Gold border inset -->
+  <rect x="24" y="24" width="752" height="752" rx="32" fill="none" stroke="url(#gold)" stroke-width="2" opacity="0.4"/>
+
+  <!-- Crown icon -->
+  <g transform="translate(400, 260)" fill="url(#gold)">
+    <!-- Crown base -->
+    <path d="M-80,40 L-100,-20 L-50,10 L0,-50 L50,10 L100,-20 L80,40 Z" stroke="none"/>
+    <!-- Crown band -->
+    <rect x="-80" y="40" width="160" height="20" rx="4"/>
+    <!-- Crown jewels -->
+    <circle cx="-50" cy="10" r="8" fill="#fce68a"/>
+    <circle cx="0" cy="-15" r="10" fill="#fce68a"/>
+    <circle cx="50" cy="10" r="8" fill="#fce68a"/>
+  </g>
+
+  <!-- HappyStore+ text -->
+  <text x="400" y="380" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="64" font-weight="800" fill="url(#goldLight)" letter-spacing="2">
+    HappyStore+
+  </text>
+
+  <!-- MEMBERSHIP text -->
+  <text x="400" y="430" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="28" font-weight="600" fill="#8fadc8" letter-spacing="8">
+    MEMBERSHIP
+  </text>
+
+  <!-- Divider line -->
+  <line x1="280" y1="460" x2="520" y2="460" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Benefits -->
+  <g font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" fill="#a0b8cc" font-size="22" text-anchor="middle">
+    <text x="400" y="510">Free Shipping on Every Order</text>
+    <text x="400" y="545">15% Off All Products</text>
+    <text x="400" y="580">Early Access &amp; Exclusive Deals</text>
+  </g>
+
+  <!-- Price badge -->
+  <g transform="translate(400, 660)">
+    <rect x="-100" y="-28" width="200" height="56" rx="28" fill="url(#gold)" opacity="0.15"/>
+    <rect x="-100" y="-28" width="200" height="56" rx="28" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+    <text x="0" y="8" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="url(#goldLight)">
+      $39.95/mo
+    </text>
+  </g>
+</svg>

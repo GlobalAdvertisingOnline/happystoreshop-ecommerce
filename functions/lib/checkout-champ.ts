@@ -18,7 +18,8 @@ export async function callCheckoutChamp(
   endpoint: string,
   params: Record<string, string>
 ): Promise<CCResponse> {
-  const url = new URL(endpoint, CC_API_BASE);
+  const normalizedEndpoint = endpoint.endsWith("/") ? endpoint : endpoint + "/";
+  const url = new URL(normalizedEndpoint, CC_API_BASE);
   url.searchParams.set("loginId", env.CHECKOUT_CHAMP_LOGIN_ID);
   url.searchParams.set("password", env.CHECKOUT_CHAMP_PASSWORD);
 

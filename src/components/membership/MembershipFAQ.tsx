@@ -7,7 +7,7 @@ const FAQ_ITEMS = [
   {
     question: "How does billing work?",
     answer:
-      "You're charged $29.95/month on the same date you joined. Your membership renews automatically each month until you cancel.",
+      "You're charged $39.95/month on the same date you joined. Your membership renews automatically each month until you cancel.",
   },
   {
     question: "How do I cancel?",

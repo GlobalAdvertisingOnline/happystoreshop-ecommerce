@@ -61,7 +61,6 @@ export function ProductDetail({ product }: { product: Product }) {
         <PriceDisplay
           price={selectedVariant.price}
           compareAtPrice={selectedVariant.compareAtPrice}
-          interval={product.type === "subscription" ? product.subscription?.interval : undefined}
         />
 
         {/* Short description */}

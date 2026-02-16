@@ -10,9 +10,10 @@ interface CategoryFilterProps {
 
 export function CategoryFilter({ categories, selected, onSelect }: CategoryFilterProps) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
       <button
         onClick={() => onSelect("All")}
+        aria-pressed={selected === "All"}
         className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
           selected === "All"
             ? "bg-brand-blue text-white shadow-sm"
@@ -25,6 +26,7 @@ export function CategoryFilter({ categories, selected, onSelect }: CategoryFilte
         <button
           key={cat}
           onClick={() => onSelect(cat)}
+          aria-pressed={selected === cat}
           className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
             selected === cat
               ? "bg-brand-blue text-white shadow-sm"

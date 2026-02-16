@@ -25,12 +25,11 @@ export function AddToCartButton({ product, variant }: AddToCartButtonProps) {
       price: variant.price,
       image: product.images[0],
       type: product.type,
+      ccProductId: product.checkoutChampProductId,
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
-
-  const isSubscription = product.type === "subscription";
 
   return (
     <div className="flex flex-col gap-3">
@@ -58,7 +57,7 @@ export function AddToCartButton({ product, variant }: AddToCartButtonProps) {
         </div>
       </div>
 
-      {/* Add to Cart / Subscribe button */}
+      {/* Add to Cart button */}
       <button
         onClick={handleAdd}
         disabled={!variant.inStock || added}
@@ -78,19 +77,19 @@ export function AddToCartButton({ product, variant }: AddToCartButtonProps) {
         ) : (
           <>
             <ShoppingCart className="h-5 w-5" />
-            {isSubscription ? "Subscribe & Save" : "Add to Cart"}
+            Add to Cart
           </>
         )}
       </button>
 
-      {/* Subscription disclosure */}
-      {isSubscription && product.subscription && (
+      {/* Subscription disclosure — only shows for actual subscription products like HappyStore+ */}
+      {product.type === "subscription" && product.subscription && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
           <p className="text-xs text-amber-800">
-            You will be charged {`$${(product.subscription.recurringPrice / 100).toFixed(2)}`}/{product.subscription.interval}.
+            This is a recurring subscription at {`$${(product.subscription.recurringPrice / 100).toFixed(2)}`}/{product.subscription.interval}.
             Cancel anytime at{" "}
-            <a href={product.subscription.cancelUrl} className="font-medium underline">
-              {product.subscription.cancelUrl}
+            <a href="/membership/manage" className="font-medium underline">
+              happystoreshop.com/membership/manage
             </a>
             .
           </p>

@@ -8,8 +8,8 @@ export interface MembershipState {
 
 export const MEMBERSHIP_CONFIG = {
   name: "HappyStore+",
-  price: 2995,
-  priceFormatted: "$29.95",
+  price: 3995,
+  priceFormatted: "$39.95",
   interval: "monthly" as const,
   shippingDiscountPercent: 100,
   productDiscountPercent: 15,

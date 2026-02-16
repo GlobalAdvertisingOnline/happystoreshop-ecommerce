@@ -197,7 +197,7 @@ export function CheckoutForm() {
           cardExpiryDate: `${expMonth}20${expYear}`,
           cvv: payment.cardCvv,
           products: items.map((item, i) => ({
-            id: item.productSlug,
+            id: item.ccProductId,
             qty: item.quantity,
             price: item.price,
             index: i + 1,
@@ -220,7 +220,7 @@ export function CheckoutForm() {
       });
 
       clearCart();
-      router.push(`/thank-you?orderId=${orderData.orderId}&email=${encodeURIComponent(contact.email)}`);
+      router.push(`/thank-you?orderId=${orderData.orderId}`);
     } catch (err) {
       setOrderError(
         err instanceof Error

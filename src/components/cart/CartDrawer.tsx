@@ -116,7 +116,8 @@ export function CartDrawer() {
                             onClick={() =>
                               updateQuantity(item.variantId, item.quantity - 1)
                             }
-                            className="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 text-slate-500 transition-colors hover:bg-slate-100"
+                            disabled={item.quantity <= 1}
+                            className="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 text-slate-500 transition-colors hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed"
                             aria-label={`Decrease quantity of ${item.name}`}
                           >
                             <Minus className="h-3 w-3" />

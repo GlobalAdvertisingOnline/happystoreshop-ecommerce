@@ -1,30 +1,34 @@
 import { Product, ProductCategory } from "@/lib/types/product";
-import { luxuryScentedCandle } from "./luxury-scented-candle";
-import { minimalistDeskLamp } from "./minimalist-desk-lamp";
-import { organicCottonThrow } from "./organic-cotton-throw";
-import { ceramicPlanterSet } from "./ceramic-planter-set";
-import { bambooBathCaddy } from "./bamboo-bath-caddy";
-import { smartDiffuser } from "./smart-diffuser";
-import { linenDuvetCover } from "./linen-duvet-cover";
-import { walnutCuttingBoard } from "./walnut-cutting-board";
-import { monthlyHomeBox } from "./monthly-home-box";
-import { quarterlyDecorBox } from "./quarterly-decor-box";
-import { digitalHomeGuide } from "./digital-home-guide";
-import { kitchenEssentialsBundle } from "./kitchen-essentials-bundle";
+import { layeringChainNecklace } from "./layering-chain-necklace";
+import { barPendantNecklace } from "./bar-pendant-necklace";
+import { fineCableChainNecklace } from "./fine-cable-chain-necklace";
+import { modernPearlNecklace } from "./modern-pearl-necklace";
+import { geometricMiniEarrings } from "./geometric-mini-earrings";
+import { minimalHoopEarrings } from "./minimal-hoop-earrings";
+import { elegantDropCrystalEarrings } from "./elegant-drop-crystal-earrings";
+import { texturedStackableRing } from "./textured-stackable-ring";
+import { crystalAccentRing } from "./crystal-accent-ring";
+import { doubleChainBracelet } from "./double-chain-bracelet";
+import { sculptedCuffBracelet } from "./sculpted-cuff-bracelet";
+import { luxeJewelrySet } from "./luxe-jewelry-set";
+import { happyStorePlusMembership } from "./happystore-plus-membership";
+
+// HappyStore+ membership is exported separately — not in main catalog
+export { happyStorePlusMembership } from "./happystore-plus-membership";
 
 export const ALL_PRODUCTS: Product[] = [
-  luxuryScentedCandle,
-  minimalistDeskLamp,
-  organicCottonThrow,
-  ceramicPlanterSet,
-  bambooBathCaddy,
-  smartDiffuser,
-  linenDuvetCover,
-  walnutCuttingBoard,
-  monthlyHomeBox,
-  quarterlyDecorBox,
-  digitalHomeGuide,
-  kitchenEssentialsBundle,
+  layeringChainNecklace,
+  barPendantNecklace,
+  fineCableChainNecklace,
+  modernPearlNecklace,
+  geometricMiniEarrings,
+  minimalHoopEarrings,
+  elegantDropCrystalEarrings,
+  texturedStackableRing,
+  crystalAccentRing,
+  doubleChainBracelet,
+  sculptedCuffBracelet,
+  luxeJewelrySet,
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {

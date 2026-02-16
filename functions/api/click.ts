@@ -11,7 +11,7 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
     const body = await context.request.json();
     const parsed = clickSchema.parse(body);
 
-    const result = await callCheckoutChamp(context.env, "/click/import", {
+    const result = await callCheckoutChamp(context.env, "/landers/clicks/import", {
       campaignId: context.env.CHECKOUT_CHAMP_CAMPAIGN_ID,
       pageType: parsed.pageType,
       requestUri: context.request.headers.get("Referer") || "https://happystoreshop.com/checkout",
@@ -22,8 +22,13 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
       return errorResponse(result.message || "Failed to create session", 502);
     }
 
+    // CC returns sessionId inside message object or as string
+    const sessionId = typeof result.message === "object" && result.message !== null
+      ? (result.message as Record<string, unknown>).sessionId
+      : result.message;
+
     return jsonResponse({
-      sessionId: result.message,
+      sessionId,
       result: "SUCCESS",
     });
   } catch (err) {

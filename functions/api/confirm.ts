@@ -11,7 +11,7 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
     const body = await context.request.json();
     const parsed = confirmSchema.parse(body);
 
-    const result = await callCheckoutChamp(context.env, "/order/confirm", {
+    const result = await callCheckoutChamp(context.env, "/order/confirm/", {
       orderId: parsed.orderId,
     });
 

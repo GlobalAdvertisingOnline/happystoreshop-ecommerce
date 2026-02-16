@@ -5,11 +5,9 @@ export function formatPrice(cents: number): string {
 export function PriceDisplay({
   price,
   compareAtPrice,
-  interval,
 }: {
   price: number;
   compareAtPrice?: number;
-  interval?: string;
 }) {
   const hasDiscount = compareAtPrice && compareAtPrice > price;
   const savingsPercent = hasDiscount
@@ -30,9 +28,6 @@ export function PriceDisplay({
         <span className="rounded-full bg-red-50 px-2.5 py-0.5 text-xs font-semibold text-brand-red">
           Save {savingsPercent}%
         </span>
-      )}
-      {interval && (
-        <span className="text-sm text-slate-500">/{interval}</span>
       )}
     </div>
   );

@@ -11,7 +11,7 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
     const body = await context.request.json();
     const parsed = leadSchema.parse(body);
 
-    const result = await callCheckoutChamp(context.env, "/lead/import", {
+    const result = await callCheckoutChamp(context.env, "/leads/import", {
       campaignId: context.env.CHECKOUT_CHAMP_CAMPAIGN_ID,
       sessionId: parsed.sessionId,
       emailAddress: parsed.email,

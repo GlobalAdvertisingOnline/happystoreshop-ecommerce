@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Crown, Truck, Percent, Check } from "lucide-react";
+import { Crown, Truck, Percent, Check, ShoppingCart } from "lucide-react";
 import { useMembership } from "@/lib/membership/MembershipContext";
+import { useCart } from "@/lib/cart/CartContext";
 import { formatPrice } from "@/components/product/PriceDisplay";
+import { happyStorePlusMembership } from "@/data/products";
+import { SHIPPING } from "@/lib/constants";
 
 interface CartMembershipUpsellProps {
   subtotal: number;
@@ -11,6 +14,11 @@ interface CartMembershipUpsellProps {
 
 export function CartMembershipUpsell({ subtotal }: CartMembershipUpsellProps) {
   const { isActive } = useMembership();
+  const { addItem, items } = useCart();
+
+  const alreadyInCart = items.some(
+    (item) => item.productSlug === happyStorePlusMembership.slug
+  );
 
   // For active members — show applied badge
   if (isActive) {
@@ -33,13 +41,49 @@ export function CartMembershipUpsell({ subtotal }: CartMembershipUpsellProps) {
     );
   }
 
+  // If membership is already in cart, show confirmation
+  if (alreadyInCart) {
+    return (
+      <div className="rounded-xl border border-amber-200 bg-amber-50 p-5">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100">
+            <Crown className="h-5 w-5 text-amber-600" />
+          </div>
+          <div>
+            <p className="text-sm font-bold text-amber-700">
+              HappyStore+ Membership in Your Cart
+            </p>
+            <p className="text-xs text-amber-600">
+              Complete checkout to activate free shipping + 15% off.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Calculate savings for non-members
-  const shippingSaved = subtotal >= 7500 ? 0 : 599; // What they'd save on shipping
+  const shippingSaved = subtotal >= SHIPPING.freeThreshold ? 0 : SHIPPING.flatRate;
   const discountSaved = Math.round(subtotal * 0.15);
   const totalSaved = shippingSaved + discountSaved;
 
   // Only show if savings are meaningful
-  if (totalSaved < 500) return null; // Less than $5 — not worth showing
+  if (totalSaved < 500) return null;
+
+  const handleAddMembership = () => {
+    const variant = happyStorePlusMembership.variants[0];
+    addItem({
+      productSlug: happyStorePlusMembership.slug,
+      variantId: variant.id,
+      quantity: 1,
+      name: happyStorePlusMembership.name,
+      variantName: variant.name,
+      price: variant.price,
+      image: happyStorePlusMembership.images[0],
+      type: "subscription",
+      ccProductId: happyStorePlusMembership.checkoutChampProductId,
+    });
+  };
 
   return (
     <div className="rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-amber-100/50 p-5">
@@ -66,16 +110,17 @@ export function CartMembershipUpsell({ subtotal }: CartMembershipUpsellProps) {
           </div>
 
           <p className="mt-3 text-xs text-slate-500">
-            Just $29.95/month · Cancel anytime
+            $39.95/month · Cancel anytime · Recurring billing until cancelled
           </p>
 
           <div className="mt-4 flex flex-wrap gap-3">
-            <Link
-              href="/membership"
-              className="rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:from-amber-600 hover:to-amber-700 hover:shadow-md"
+            <button
+              onClick={handleAddMembership}
+              className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:from-amber-600 hover:to-amber-700 hover:shadow-md"
             >
-              Join HappyStore+
-            </Link>
+              <ShoppingCart className="h-4 w-4" />
+              Add HappyStore+ to Cart
+            </button>
             <Link
               href="/membership"
               className="rounded-lg border border-amber-200 px-5 py-2.5 text-sm font-medium text-amber-700 transition-all hover:bg-amber-50"

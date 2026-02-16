@@ -41,7 +41,7 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }: CartItemRowPro
           <p className="text-sm text-slate-500">{item.variantName}</p>
           {item.type === "subscription" && (
             <span className="mt-1 inline-block rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
-              Subscription
+              Monthly Membership
             </span>
           )}
         </div>
@@ -51,7 +51,8 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }: CartItemRowPro
           <div className="flex items-center rounded-lg border border-slate-200">
             <button
               onClick={() => onUpdateQuantity(item.variantId, item.quantity - 1)}
-              className="flex h-11 w-11 items-center justify-center text-slate-500 transition-colors hover:bg-slate-50"
+              disabled={item.quantity <= 1}
+              className="flex h-11 w-11 items-center justify-center text-slate-500 transition-colors hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label={`Decrease quantity of ${item.name}`}
             >
               <Minus className="h-3.5 w-3.5" />

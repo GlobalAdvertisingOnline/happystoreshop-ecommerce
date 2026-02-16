@@ -12,7 +12,7 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
     const parsed = membershipJoinSchema.parse(body);
 
     // Step 1: Import Click for membership
-    const clickResult = await callCheckoutChamp(context.env, "/click/import", {
+    const clickResult = await callCheckoutChamp(context.env, "/landers/clicks/import", {
       campaignId: context.env.CHECKOUT_CHAMP_CAMPAIGN_ID,
       pageType: "checkoutPage",
       requestUri: "https://happystoreshop.com/membership",
@@ -23,10 +23,13 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
       return errorResponse("Failed to initialize membership session", 502);
     }
 
-    const sessionId = clickResult.message as string;
+    // CC returns sessionId inside message object
+    const sessionId = typeof clickResult.message === "object" && clickResult.message !== null
+      ? (clickResult.message as Record<string, unknown>).sessionId as string
+      : clickResult.message as string;
 
     // Step 2: Import Lead
-    const leadResult = await callCheckoutChamp(context.env, "/lead/import", {
+    const leadResult = await callCheckoutChamp(context.env, "/leads/import", {
       campaignId: context.env.CHECKOUT_CHAMP_CAMPAIGN_ID,
       sessionId,
       emailAddress: parsed.email,
@@ -54,9 +57,9 @@ export const onRequestPost: PagesFunction<Env> = async (context: CFContext) => {
       creditCardNumber: parsed.cardNumber,
       expirationDate: parsed.cardExpiryDate,
       CVV: parsed.cvv,
-      product1_id: "membership", // Will be mapped to actual CC product ID
+      product1_id: "176", // TrustRewards Program in CC
       product1_qty: "1",
-      product1_price: "29.95",
+      product1_price: "39.95",
       ipAddress: context.request.headers.get("CF-Connecting-IP") || "0.0.0.0",
     });
 

@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { Crown } from "lucide-react";
 import { CartItem } from "@/lib/types/product";
 import { formatPrice } from "@/components/product/PriceDisplay";
+import { useMembership } from "@/lib/membership/MembershipContext";
+import { SHIPPING, MEMBERSHIP } from "@/lib/constants";
 
 interface ReviewStepProps {
   contactEmail: string;
@@ -37,12 +40,23 @@ export function ReviewStep({
   isSubmitting,
   error,
 }: ReviewStepProps) {
-  const shippingCost = subtotal >= 7500 ? 0 : 599;
-  const total = subtotal + shippingCost;
+  const { isActive } = useMembership();
+
+  const memberDiscount = isActive ? Math.round(subtotal * (MEMBERSHIP.productDiscount / 100)) : 0;
+  const discountedSubtotal = subtotal - memberDiscount;
+  const shippingCost = isActive ? 0 : discountedSubtotal >= SHIPPING.freeThreshold ? 0 : SHIPPING.flatRate;
+  const total = discountedSubtotal + shippingCost;
 
   return (
     <div className="flex flex-col gap-6">
       <h2 className="text-xl font-bold text-slate-900">Review Your Order</h2>
+
+      {isActive && (
+        <div className="flex items-center gap-2 rounded-lg bg-green-50 px-4 py-2.5">
+          <Crown className="h-4 w-4 text-green-600" />
+          <span className="text-sm font-semibold text-green-700">HappyStore+ Member — Discounts Applied</span>
+        </div>
+      )}
 
       {/* Contact */}
       <div className="rounded-lg border border-slate-100 p-4">
@@ -71,7 +85,7 @@ export function ReviewStep({
           {items.map((item) => (
             <div key={item.variantId} className="flex justify-between text-sm">
               <span className="text-slate-600">
-                {item.name} ({item.variantName}) × {item.quantity}
+                {item.name} ({item.variantName}) &times; {item.quantity}
               </span>
               <span className="font-medium text-slate-900">
                 {formatPrice(item.price * item.quantity)}
@@ -84,10 +98,20 @@ export function ReviewStep({
             <span className="text-slate-600">Subtotal</span>
             <span className="font-medium">{formatPrice(subtotal)}</span>
           </div>
+          {memberDiscount > 0 && (
+            <div className="flex justify-between text-sm">
+              <span className="text-green-600">Member Discount (15%)</span>
+              <span className="font-medium text-green-600">-{formatPrice(memberDiscount)}</span>
+            </div>
+          )}
           <div className="flex justify-between text-sm">
             <span className="text-slate-600">Shipping</span>
             <span className="font-medium">
-              {shippingCost === 0 ? "FREE" : formatPrice(shippingCost)}
+              {shippingCost === 0 ? (
+                <span className="text-brand-green">{isActive ? "FREE (Member)" : "FREE"}</span>
+              ) : (
+                formatPrice(shippingCost)
+              )}
             </span>
           </div>
           <div className="mt-2 flex justify-between text-base font-bold text-slate-900">
@@ -97,12 +121,12 @@ export function ReviewStep({
         </div>
       </div>
 
-      {/* Subscription consent (required for subscription items) */}
+      {/* Membership recurring billing consent — only shown when HappyStore+ is in cart */}
       {hasSubscription && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
           <p className="mb-3 text-sm font-medium text-amber-800">
-            Your order includes recurring subscription items. You will be charged
-            on a recurring basis until you cancel.
+            Your order includes HappyStore+ Membership ($39.95/month). Your card
+            will be charged $39.95 each month until you cancel.
           </p>
           <label className="flex items-start gap-3 cursor-pointer">
             <input
@@ -112,9 +136,9 @@ export function ReviewStep({
               className="mt-0.5 h-4 w-4 rounded border-amber-400 text-brand-blue focus:ring-brand-blue"
             />
             <span className="text-sm text-amber-800">
-              I agree to recurring charges as described above. I understand I can
+              I agree to the recurring monthly charge of $39.95. I understand I can
               cancel anytime at{" "}
-              <a href="/cancel" className="font-medium underline">happystoreshop.com/cancel</a>.
+              <a href="/membership/manage" className="font-medium underline">happystoreshop.com/membership/manage</a>.
             </span>
           </label>
         </div>

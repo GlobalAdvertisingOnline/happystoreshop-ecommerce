@@ -10,12 +10,13 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
-}): Metadata {
-  const product = getProductBySlug(params.slug);
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
   if (!product) return {};
 
   return {
@@ -24,12 +25,13 @@ export function generateMetadata({
   };
 }
 
-export default function ProductPage({
+export default async function ProductPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const product = getProductBySlug(params.slug);
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
 
   if (!product) {
     notFound();
@@ -42,15 +44,15 @@ export default function ProductPage({
           {/* Breadcrumb */}
           <nav className="mb-6 text-sm text-slate-500" aria-label="Breadcrumb">
             <a href="/shop" className="hover:text-brand-blue transition-colors">Shop</a>
-            <span className="mx-2">/</span>
+            <span className="mx-2" aria-hidden="true">/</span>
             <a
               href={`/shop?category=${encodeURIComponent(product.category)}`}
               className="hover:text-brand-blue transition-colors"
             >
               {product.category}
             </a>
-            <span className="mx-2">/</span>
-            <span className="text-slate-700 font-medium">{product.name}</span>
+            <span className="mx-2" aria-hidden="true">/</span>
+            <span className="text-slate-700 font-medium" aria-current="page">{product.name}</span>
           </nav>
 
           <ProductDetail product={product} />

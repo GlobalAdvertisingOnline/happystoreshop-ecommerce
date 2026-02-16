@@ -1,8 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { Crown } from "lucide-react";
 import { CartItem } from "@/lib/types/product";
 import { formatPrice } from "@/components/product/PriceDisplay";
+import { useMembership } from "@/lib/membership/MembershipContext";
+import { SHIPPING, MEMBERSHIP } from "@/lib/constants";
 
 interface OrderSummaryProps {
   items: CartItem[];
@@ -10,14 +13,25 @@ interface OrderSummaryProps {
 }
 
 export function OrderSummary({ items, subtotal }: OrderSummaryProps) {
-  const shippingCost = subtotal >= 7500 ? 0 : 599;
-  const total = subtotal + shippingCost;
+  const { isActive } = useMembership();
+
+  const memberDiscount = isActive ? Math.round(subtotal * (MEMBERSHIP.productDiscount / 100)) : 0;
+  const discountedSubtotal = subtotal - memberDiscount;
+  const shippingCost = isActive ? 0 : discountedSubtotal >= SHIPPING.freeThreshold ? 0 : SHIPPING.flatRate;
+  const total = discountedSubtotal + shippingCost;
 
   return (
     <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-6">
       <h2 className="mb-4 text-lg font-bold text-slate-900">
         Order Summary ({items.length})
       </h2>
+
+      {isActive && (
+        <div className="mb-4 flex items-center gap-2 rounded-lg bg-green-50 px-3 py-2">
+          <Crown className="h-4 w-4 text-green-600" />
+          <span className="text-xs font-semibold text-green-700">HappyStore+ Discounts Applied</span>
+        </div>
+      )}
 
       <div className="flex flex-col gap-3">
         {items.map((item) => (
@@ -52,11 +66,17 @@ export function OrderSummary({ items, subtotal }: OrderSummaryProps) {
           <span className="text-slate-600">Subtotal</span>
           <span className="font-medium text-slate-900">{formatPrice(subtotal)}</span>
         </div>
+        {memberDiscount > 0 && (
+          <div className="mt-1 flex justify-between text-sm">
+            <span className="text-green-600">Member Discount (15%)</span>
+            <span className="font-medium text-green-600">-{formatPrice(memberDiscount)}</span>
+          </div>
+        )}
         <div className="mt-1 flex justify-between text-sm">
           <span className="text-slate-600">Shipping</span>
           <span className="font-medium text-slate-900">
             {shippingCost === 0 ? (
-              <span className="text-brand-green">FREE</span>
+              <span className="text-brand-green">{isActive ? "FREE (Member)" : "FREE"}</span>
             ) : (
               formatPrice(shippingCost)
             )}

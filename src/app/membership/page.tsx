@@ -8,7 +8,7 @@ import { JoinForm } from "@/components/membership/JoinForm";
 export const metadata: Metadata = {
   title: "HappyStore+ Membership",
   description:
-    "Join HappyStore+ for $29.95/month. Get free shipping and 15% off everything, every time you shop. Cancel anytime.",
+    "Join HappyStore+ for $39.95/month. Get free shipping and 15% off everything, every time you shop. Cancel anytime.",
 };
 
 export default function MembershipPage() {

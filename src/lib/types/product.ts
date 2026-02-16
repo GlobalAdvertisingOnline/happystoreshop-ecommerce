@@ -34,13 +34,11 @@ export interface ProductVariant {
 }
 
 export type ProductCategory =
-  | "Living Room"
-  | "Bedroom"
-  | "Kitchen"
-  | "Bathroom"
-  | "Home Office"
-  | "Decor"
-  | "Bundles";
+  | "Necklaces"
+  | "Earrings"
+  | "Rings"
+  | "Bracelets"
+  | "Sets";
 
 export interface CartItem {
   productSlug: string;
@@ -51,4 +49,5 @@ export interface CartItem {
   price: number;
   image: { src: string; alt: string };
   type: "physical" | "digital" | "subscription";
+  ccProductId: string;
 }

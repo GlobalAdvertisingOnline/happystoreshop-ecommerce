@@ -21,8 +21,8 @@ export const membershipTerms = {
     {
       id: "billing",
       title: "3. Billing & Payment",
-      content: `<p>HappyStore+ costs <strong>$29.95 per month</strong>. Your membership begins immediately upon signup, and you will be billed on the same date each month.</p>
-<p>We accept major credit and debit cards. By providing your payment information, you authorize us to charge your card $29.95 each month until you cancel.</p>
+      content: `<p>HappyStore+ costs <strong>$39.95 per month</strong>. Your membership begins immediately upon signup, and you will be billed on the same date each month.</p>
+<p>We accept major credit and debit cards. By providing your payment information, you authorize us to charge your card $39.95 each month until you cancel.</p>
 <p>If a payment fails, we may reattempt the charge up to two additional times within 7 days. If all attempts fail, your membership may be suspended until payment is resolved.</p>`,
     },
     {

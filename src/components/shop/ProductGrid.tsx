@@ -1,14 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Product, ProductCategory } from "@/lib/types/product";
 import { ProductCard } from "./ProductCard";
 import { CategoryFilter } from "./CategoryFilter";
 import { getAllCategories } from "@/data/products";
 
 export function ProductGrid({ products }: { products: Product[] }) {
+  const searchParams = useSearchParams();
   const [selected, setSelected] = useState<ProductCategory | "All">("All");
   const categories = getAllCategories();
+
+  useEffect(() => {
+    const cat = searchParams.get("category");
+    if (cat && categories.includes(cat as ProductCategory)) {
+      setSelected(cat as ProductCategory);
+    }
+  }, [searchParams, categories]);
 
   const filtered =
     selected === "All"

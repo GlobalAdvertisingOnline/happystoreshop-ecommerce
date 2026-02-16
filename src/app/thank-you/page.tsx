@@ -8,7 +8,6 @@ import { CheckCircle, Package, ArrowRight } from "lucide-react";
 function ThankYouContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
-  const email = searchParams.get("email");
 
   return (
     <section className="py-16 md:py-24">
@@ -24,11 +23,7 @@ function ThankYouContent() {
 
         <p className="mt-4 text-lg text-slate-600">
           Your order has been placed successfully.
-          {email ? (
-            <> A confirmation email has been sent to <strong>{email}</strong>.</>
-          ) : (
-            " A confirmation email has been sent to your inbox."
-          )}
+          A confirmation email has been sent to your inbox.
         </p>
 
         {/* Order details card */}

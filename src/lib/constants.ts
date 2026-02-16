@@ -13,54 +13,60 @@ export const IMAGES = {
 } as const;
 
 export const PRODUCT_IMAGES = {
-  scentedCandle1: `${R2_BASE}/product-scented-candle-1.webp`,
-  scentedCandle2: `${R2_BASE}/product-scented-candle-2.webp`,
-  deskLamp1: `${R2_BASE}/product-desk-lamp-1.webp`,
-  deskLamp2: `${R2_BASE}/product-desk-lamp-2.webp`,
-  cottonThrow1: `${R2_BASE}/product-cotton-throw-1.webp`,
-  cottonThrow2: `${R2_BASE}/product-cotton-throw-2.webp`,
-  planterSet1: `${R2_BASE}/product-planter-set-1.webp`,
-  planterSet2: `${R2_BASE}/product-planter-set-2.webp`,
-  bathCaddy1: `${R2_BASE}/product-bath-caddy-1.webp`,
-  bathCaddy2: `${R2_BASE}/product-bath-caddy-2.webp`,
-  diffuser1: `${R2_BASE}/product-diffuser-1.webp`,
-  diffuser2: `${R2_BASE}/product-diffuser-2.webp`,
-  duvetCover1: `${R2_BASE}/product-duvet-cover-1.webp`,
-  duvetCover2: `${R2_BASE}/product-duvet-cover-2.webp`,
-  cuttingBoard1: `${R2_BASE}/product-cutting-board-1.webp`,
-  cuttingBoard2: `${R2_BASE}/product-cutting-board-2.webp`,
-  homeBox1: `${R2_BASE}/product-home-box-1.webp`,
-  homeBox2: `${R2_BASE}/product-home-box-2.webp`,
-  decorBox1: `${R2_BASE}/product-decor-box-1.webp`,
-  decorBox2: `${R2_BASE}/product-decor-box-2.webp`,
-  homeGuide1: `${R2_BASE}/product-home-guide-1.webp`,
-  homeGuide2: `${R2_BASE}/product-home-guide-2.webp`,
-  kitchenBundle1: `${R2_BASE}/product-kitchen-bundle-1.webp`,
-  kitchenBundle2: `${R2_BASE}/product-kitchen-bundle-2.webp`,
+  layeringChain1: `${R2_BASE}/product-layering-chain-1.webp`,
+  layeringChain2: `${R2_BASE}/product-layering-chain-2.webp`,
+  barPendant1: `${R2_BASE}/product-bar-pendant-1.webp`,
+  barPendant2: `${R2_BASE}/product-bar-pendant-2.webp`,
+  fineCableChain1: `${R2_BASE}/product-fine-cable-chain-1.webp`,
+  fineCableChain2: `${R2_BASE}/product-fine-cable-chain-2.webp`,
+  modernPearl1: `${R2_BASE}/product-modern-pearl-1.webp`,
+  modernPearl2: `${R2_BASE}/product-modern-pearl-2.webp`,
+  geometricEarrings1: `${R2_BASE}/product-geometric-earrings-1.webp`,
+  geometricEarrings2: `${R2_BASE}/product-geometric-earrings-2.webp`,
+  minimalHoop1: `${R2_BASE}/product-minimal-hoop-1.webp`,
+  minimalHoop2: `${R2_BASE}/product-minimal-hoop-2.webp`,
+  elegantDropCrystal1: `${R2_BASE}/product-elegant-drop-crystal-1.webp`,
+  elegantDropCrystal2: `${R2_BASE}/product-elegant-drop-crystal-2.webp`,
+  texturedRing1: `${R2_BASE}/product-textured-ring-1.webp`,
+  texturedRing2: `${R2_BASE}/product-textured-ring-2.webp`,
+  crystalRing1: `${R2_BASE}/product-crystal-ring-1.webp`,
+  crystalRing2: `${R2_BASE}/product-crystal-ring-2.webp`,
+  doubleChain1: `${R2_BASE}/product-double-chain-1.webp`,
+  doubleChain2: `${R2_BASE}/product-double-chain-2.webp`,
+  sculptedCuff1: `${R2_BASE}/product-sculpted-cuff-1.webp`,
+  sculptedCuff2: `${R2_BASE}/product-sculpted-cuff-2.webp`,
+  luxeSet1: `${R2_BASE}/product-luxe-set-1.webp`,
+  luxeSet2: `${R2_BASE}/product-luxe-set-2.webp`,
 } as const;
 
 export const COMPANY = {
   name: "HappyStoreShop",
-  tagline: "Your Trusted Online Shopping Partner",
+  tagline: "Your Trusted Online Jewelry Partner",
   email: "support@happystoreshop.com",
   phone: "(844) 308-2059",
   hours: "Monday – Friday, 9:00 AM – 6:00 PM EST",
   url: "https://happystoreshop.com",
-  year: 2024,
+  year: 2025,
 } as const;
 
 export const MEMBERSHIP = {
   name: "HappyStore+",
-  price: 2995,
+  price: 3995,
   interval: "monthly" as const,
   shippingDiscount: 100,
   productDiscount: 15,
-  checkoutChampProductId: "",
+  checkoutChampProductId: "176",
+} as const;
+
+export const SHIPPING = {
+  flatRate: 599,
+  freeThreshold: 7500,
 } as const;
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/shop" },
+  { label: "HappyStore+", href: "/membership" },
   { label: "Track Order", href: "/tracking" },
   { label: "Contact Us", href: "/contact" },
 ] as const;

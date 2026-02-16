@@ -1,14 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { SHIPPING } from "@/lib/constants";
 
 export function SavingsCalculator() {
   const [monthlySpend, setMonthlySpend] = useState(200);
 
-  const shippingSaved = monthlySpend < 75 ? 5.99 : 0; // Free shipping kicks in at $75
+  const shippingThresholdDollars = SHIPPING.freeThreshold / 100;
+  const shippingDollars = SHIPPING.flatRate / 100;
+  const shippingSaved = monthlySpend < shippingThresholdDollars ? shippingDollars : 0;
   const discountSaved = monthlySpend * 0.15;
   const totalSaved = shippingSaved + discountSaved;
-  const netSavings = totalSaved - 29.95;
+  const netSavings = totalSaved - 39.95;
 
   return (
     <section className="bg-slate-50 py-12 md:py-16">
@@ -52,7 +55,7 @@ export function SavingsCalculator() {
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-slate-600">HappyStore+ membership</span>
-              <span className="font-semibold text-slate-500">−$29.95</span>
+              <span className="font-semibold text-slate-500">&minus;$39.95</span>
             </div>
             <div className="border-t border-slate-100 pt-3">
               <div className="flex justify-between">
@@ -71,7 +74,7 @@ export function SavingsCalculator() {
         </div>
 
         <p className="mt-4 text-xs text-slate-500">
-          Shipping is $5.99 per order (free on orders $75+). Actual savings may vary.
+          Shipping is ${shippingDollars.toFixed(2)} per order (free on orders ${shippingThresholdDollars}+). Actual savings may vary.
         </p>
       </div>
     </section>

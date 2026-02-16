@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   description:
     "HappyStoreShop is your trusted online shopping partner, delivering quality products and exceptional customer service to thousands of happy customers worldwide.",
-  keywords: ["online shopping", "trusted store", "customer service", "order tracking", "secure shopping"],
+  keywords: ["jewelry", "necklaces", "earrings", "rings", "bracelets", "fine jewelry", "online jewelry store"],
   openGraph: {
     type: "website",
     locale: "en_US",
