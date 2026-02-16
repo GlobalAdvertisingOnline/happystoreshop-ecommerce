@@ -40,7 +40,7 @@ export function AddToCartButton({ product, variant }: AddToCartButtonProps) {
         <div className="flex items-center rounded-lg border border-slate-200">
           <button
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="flex h-10 w-10 items-center justify-center text-slate-500 transition-colors hover:bg-slate-50"
+            className="flex h-11 w-11 items-center justify-center text-slate-500 transition-colors hover:bg-slate-50"
             aria-label="Decrease quantity"
           >
             <Minus className="h-4 w-4" />
@@ -50,7 +50,7 @@ export function AddToCartButton({ product, variant }: AddToCartButtonProps) {
           </span>
           <button
             onClick={() => setQuantity(Math.min(10, quantity + 1))}
-            className="flex h-10 w-10 items-center justify-center text-slate-500 transition-colors hover:bg-slate-50"
+            className="flex h-11 w-11 items-center justify-center text-slate-500 transition-colors hover:bg-slate-50"
             aria-label="Increase quantity"
           >
             <Plus className="h-4 w-4" />
